@@ -1,0 +1,123 @@
+.shopPage {
+  min-height: calc(100vh - 200px);
+}
+
+.hero {
+  background-color: var(--color-gray-light);
+  padding: var(--space-3xl) 0;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  color: var(--color-black);
+}
+
+.heroDescription {
+  font-size: 18px;
+  color: var(--color-gray-dark);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
+}
+
+.heroActions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.shopHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  margin-top: var(--space-3xl);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.pageTitle {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.sortContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.sortLabel {
+  font-size: 16px;
+  color: var(--color-gray-dark);
+}
+
+.sortSelect {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: 0;
+  font-size: 16px;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.sortSelect:focus {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-xl);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--space-3xl);
+  color: var(--color-gray-dark);
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .shopPage {
+    padding: 0;
+  }
+
+  .heroTitle {
+    font-size: 36px;
+  }
+
+  .heroDescription {
+    font-size: 16px;
+  }
+
+  .shopHeader {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: var(--space-2xl);
+    padding: 0 var(--space-md);
+  }
+
+  .pageTitle {
+    font-size: 28px;
+  }
+
+  .productsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding: 0 var(--space-md);
+  }
+}
+

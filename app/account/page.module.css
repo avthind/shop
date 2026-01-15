@@ -1,0 +1,247 @@
+.accountPage {
+  padding: var(--space-2xl) 0 var(--space-3xl);
+  min-height: calc(100vh - 200px);
+}
+
+.accountHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.pageTitle {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.logoutButton {
+  background-color: transparent;
+  color: var(--color-gray-dark);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: 0;
+  padding: var(--space-xs) var(--space-md);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.accountTabs {
+  display: flex;
+  gap: var(--space-md);
+  border-bottom: 1px solid var(--color-gray-light);
+  margin-bottom: var(--space-xl);
+}
+
+.tab {
+  padding: var(--space-md) var(--space-lg);
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-gray-dark);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin-bottom: -1px;
+}
+
+.tab:hover {
+  color: var(--color-black);
+}
+
+.tabActive {
+  color: var(--color-black);
+  border-bottom-color: var(--color-black);
+}
+
+.accountContent {
+  max-width: 800px;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: var(--space-xl);
+  color: var(--color-black);
+}
+
+.profileSection,
+.ordersSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  background-color: var(--color-gray-light);
+  padding: var(--space-xl);
+  border-radius: 0;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+.input {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: 0;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  min-height: 44px;
+}
+
+.input:focus {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+.input:disabled {
+  background-color: var(--color-gray-light);
+  cursor: not-allowed;
+}
+
+.helpText {
+  font-size: 12px;
+  color: var(--color-gray-dark);
+  margin-top: var(--space-xs);
+}
+
+.emptyOrders {
+  text-align: center;
+  padding: var(--space-3xl) 0;
+  color: var(--color-gray-dark);
+  font-size: 16px;
+}
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.orderItem {
+  background-color: var(--color-gray-light);
+  border-radius: 0;
+  padding: var(--space-xl);
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.orderId {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-black);
+  margin-bottom: var(--space-xs);
+}
+
+.orderDate {
+  font-size: 14px;
+  color: var(--color-gray-dark);
+}
+
+.orderInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+}
+
+.orderTotal {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.orderStatus {
+  font-size: 14px;
+  font-weight: 500;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 0;
+  text-transform: capitalize;
+}
+
+.orderStatusCompleted {
+  background-color: var(--color-accent-blue);
+  color: var(--color-white);
+}
+
+.orderStatusPending {
+  background-color: var(--color-gray-light);
+  color: var(--color-gray-dark);
+}
+
+.orderStatusCancelled {
+  background-color: var(--color-gray-dark);
+  color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .accountPage {
+    padding: var(--space-lg) 0 var(--space-2xl);
+  }
+
+  .pageTitle {
+    font-size: 28px;
+  }
+
+  .sectionTitle {
+    font-size: 24px;
+  }
+
+  .accountTabs {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tab {
+    border-bottom: 1px solid var(--color-gray-light);
+    border-left: 2px solid transparent;
+    text-align: left;
+  }
+
+  .tabActive {
+    border-bottom-color: var(--color-gray-light);
+    border-left-color: var(--color-black);
+  }
+
+  .orderHeader {
+    flex-direction: column;
+  }
+
+  .orderInfo {
+    align-items: flex-start;
+  }
+
+  .profileForm {
+    padding: var(--space-lg);
+  }
+}
+

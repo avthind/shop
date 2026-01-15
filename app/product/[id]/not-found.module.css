@@ -1,0 +1,39 @@
+.notFound {
+  padding: var(--space-3xl) 0;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+}
+
+.notFoundContent {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.notFoundTitle {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.notFoundText {
+  font-size: 18px;
+  color: var(--color-gray-dark);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .notFoundTitle {
+    font-size: 28px;
+  }
+
+  .notFoundText {
+    font-size: 16px;
+  }
+}
+

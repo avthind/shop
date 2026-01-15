@@ -1,0 +1,151 @@
+.authPage {
+  padding: var(--space-3xl) 0;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+}
+
+.authContent {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  color: var(--color-black);
+}
+
+.error {
+  background-color: #fee;
+  color: #c33;
+  padding: var(--space-md);
+  border-radius: 0;
+  margin-bottom: var(--space-md);
+  font-size: 14px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  background-color: var(--color-gray-light);
+  padding: var(--space-xl);
+  border-radius: 0;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+.input {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: 0;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  min-height: 44px;
+}
+
+.input:focus {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: var(--space-sm);
+  margin-bottom: 0;
+}
+
+.submitButton button {
+  width: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: var(--space-lg) 0;
+  color: var(--color-gray-dark);
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-gray-dark);
+}
+
+.divider span {
+  padding: 0 var(--space-md);
+}
+
+.googleButton {
+  width: 100%;
+}
+
+.googleButton button {
+  width: 100%;
+}
+
+.googleButtonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.googleIcon {
+  flex-shrink: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: calc(var(--space-lg) * -1 + var(--space-xs));
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.link {
+  color: var(--color-accent-blue);
+  text-decoration: underline;
+  font-size: 14px;
+  transition: opacity 0.2s ease;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .authPage {
+    padding: var(--space-xl) 0;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .form {
+    padding: var(--space-lg);
+  }
+}
+

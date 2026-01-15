@@ -1,0 +1,85 @@
+.card {
+  background-color: var(--color-white);
+  border-radius: 0;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: var(--color-gray-light);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.wishlistButton {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background-color: var(--color-white);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-black);
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 10;
+}
+
+.card:hover .wishlistButton,
+.wishlistButton:focus-visible {
+  opacity: 1;
+}
+
+.wishlistButton:hover {
+  background-color: var(--color-gray-light);
+}
+
+.wishlistButtonActive {
+  opacity: 1;
+  color: var(--color-accent-blue);
+}
+
+.cardContent {
+  padding: var(--space-md);
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+  color: var(--color-black);
+}
+
+.productPrice {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-black);
+}
+

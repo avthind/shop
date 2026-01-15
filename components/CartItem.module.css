@@ -1,0 +1,130 @@
+.cartItem {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.cartItem:last-child {
+  border-bottom: none;
+}
+
+.imageLink {
+  flex-shrink: 0;
+  display: block;
+}
+
+.image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 0;
+  background-color: var(--color-gray-light);
+}
+
+.cartItemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.cartItemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-black);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.productName:hover {
+  opacity: 0.7;
+}
+
+.productPrice {
+  font-size: 16px;
+  color: var(--color-gray-dark);
+}
+
+.cartItemActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.quantitySelector {
+  display: flex;
+  align-items: center;
+}
+
+.quantitySelect {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: 0;
+  font-size: 16px;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  cursor: pointer;
+  min-width: 60px;
+}
+
+.quantitySelect:focus {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+.itemTotal {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-black);
+  margin-left: auto;
+}
+
+.removeButton {
+  padding: var(--space-xs);
+  color: var(--color-gray-dark);
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeButton:hover {
+  color: var(--color-black);
+}
+
+.removeButton:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  .cartItem {
+    flex-direction: column;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .cartItemActions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .itemTotal {
+    margin-left: 0;
+  }
+}
+
