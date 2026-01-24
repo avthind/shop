@@ -13,7 +13,8 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
-  const { login, loginWithGoogle } = useAuth();
+  const [appleLoading, setAppleLoading] = useState(false);
+  const { login, loginWithGoogle, loginWithApple } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,6 +43,20 @@ export default function LoginPage() {
       setError(err.message || 'Failed to sign in with Google');
     } finally {
       setGoogleLoading(false);
+    }
+  };
+
+  const handleAppleSignIn = async () => {
+    setError('');
+    setAppleLoading(true);
+
+    try {
+      await loginWithApple();
+      router.push('/account');
+    } catch (err: any) {
+      setError(err.message || 'Failed to sign in with Apple');
+    } finally {
+      setAppleLoading(false);
     }
   };
 
@@ -99,7 +114,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleSignIn}
             className={styles.googleButton}
-            disabled={googleLoading || loading}
+            disabled={googleLoading || appleLoading || loading}
             variant="secondary"
           >
             <span className={styles.googleButtonContent}>
@@ -122,6 +137,20 @@ export default function LoginPage() {
                 />
               </svg>
               {googleLoading ? 'signing in...' : 'continue with google'}
+            </span>
+          </Button>
+          <Button
+            type="button"
+            onClick={handleAppleSignIn}
+            className={styles.googleButton}
+            disabled={googleLoading || appleLoading || loading}
+            variant="secondary"
+          >
+            <span className={styles.googleButtonContent}>
+              <svg className={styles.googleIcon} viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+              </svg>
+              {appleLoading ? 'signing in...' : 'continue with apple'}
             </span>
           </Button>
         </div>
