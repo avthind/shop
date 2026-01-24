@@ -10,7 +10,6 @@ import {
   sendPasswordResetEmail,
   updateProfile,
   GoogleAuthProvider,
-  OAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
@@ -21,7 +20,6 @@ interface AuthContextType {
   signup: (email: string, password: string, displayName?: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
-  loginWithApple: () => Promise<void>;
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
 }
@@ -54,11 +52,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
-  };
-
-  const loginWithApple = async () => {
-    const provider = new OAuthProvider('apple.com');
     await signInWithPopup(auth, provider);
   };
 

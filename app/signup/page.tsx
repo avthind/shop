@@ -15,8 +15,7 @@ export default function SignupPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
-  const [appleLoading, setAppleLoading] = useState(false);
-  const { signup, loginWithGoogle, loginWithApple } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,20 +55,6 @@ export default function SignupPage() {
       setError(err.message || 'Failed to sign up with Google');
     } finally {
       setGoogleLoading(false);
-    }
-  };
-
-  const handleAppleSignIn = async () => {
-    setError('');
-    setAppleLoading(true);
-
-    try {
-      await loginWithApple();
-      router.push('/account');
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign up with Apple');
-    } finally {
-      setAppleLoading(false);
     }
   };
 
