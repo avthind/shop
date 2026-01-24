@@ -41,12 +41,31 @@
 }
 
 .lastUpdated {
-  margin-top: var(--space-xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid var(--color-gray-light);
+  margin-bottom: var(--space-xl);
   font-size: 14px;
   color: var(--color-gray-dark);
   font-style: italic;
+}
+
+.subsectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-black);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.section ul {
+  margin-left: var(--space-lg);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.section ul li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-gray-dark);
+  margin-bottom: var(--space-xs);
 }
 
 @media (max-width: 768px) {

@@ -2,36 +2,57 @@
   min-height: calc(100vh - 200px);
 }
 
-.hero {
-  background-color: var(--color-gray-light);
-  padding: var(--space-3xl) 0;
-  text-align: center;
+.banner {
+  background-color: var(--color-accent-blue);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-accent-blue);
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
 }
 
-.heroContent {
-  max-width: 600px;
-  margin: 0 auto;
+.bannerWrapper {
+  width: 100%;
+  overflow: hidden;
 }
 
-.heroTitle {
-  font-size: 48px;
-  font-weight: 600;
-  margin-bottom: var(--space-md);
-  color: var(--color-black);
-}
-
-.heroDescription {
-  font-size: 18px;
-  color: var(--color-gray-dark);
-  margin-bottom: var(--space-xl);
-  line-height: 1.6;
-}
-
-.heroActions {
+.bannerContent {
   display: flex;
-  gap: var(--space-md);
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  font-size: 13px;
+  color: var(--color-white);
+  text-transform: lowercase;
+  animation: scroll 30s linear infinite;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.bannerText {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex-shrink: 0;
+}
+
+.bannerText span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.separator {
+  color: var(--color-white);
+  opacity: 0.7;
+  padding: 0 var(--space-md);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .shopHeader {
@@ -79,7 +100,7 @@
 
 .productsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-xl);
 }
 
@@ -90,17 +111,24 @@
   font-size: 18px;
 }
 
+@media (max-width: 1024px) {
+  .productsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .shopPage {
     padding: 0;
   }
 
-  .heroTitle {
-    font-size: 36px;
+  .bannerContent {
+    font-size: 12px;
+    gap: var(--space-md);
   }
 
-  .heroDescription {
-    font-size: 16px;
+  .separator {
+    padding: 0 var(--space-sm);
   }
 
   .shopHeader {

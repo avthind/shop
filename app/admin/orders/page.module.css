@@ -1,0 +1,237 @@
+.ordersPage {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--space-xl, 32px);
+}
+
+.header h1 {
+  font-size: var(--text-2xl, 24px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md, 16px);
+  margin-bottom: var(--space-lg, 24px);
+}
+
+.searchBox {
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--space-sm, 12px);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  font-size: var(--text-sm, 14px);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-accent-blue, #A7D8FF);
+}
+
+.statusFilters {
+  display: flex;
+  gap: var(--space-xs, 8px);
+  flex-wrap: wrap;
+}
+
+.statusFilters button {
+  padding: var(--space-xs, 8px) var(--space-sm, 12px);
+  background: var(--color-white, #ffffff);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  font-size: var(--text-sm, 14px);
+  transition: all 0.2s ease;
+}
+
+.statusFilters button:hover {
+  background-color: var(--color-gray-light, #F5F5F5);
+}
+
+.filterActive {
+  background-color: var(--color-accent-blue, #A7D8FF) !important;
+  border-color: var(--color-accent-blue, #A7D8FF) !important;
+  color: var(--color-black, #000000) !important;
+}
+
+.ordersTable {
+  background: var(--color-white, #ffffff);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid #e0e0e0;
+  overflow-x: auto;
+}
+
+.ordersTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ordersTable thead {
+  background-color: var(--color-gray-light, #F5F5F5);
+}
+
+.ordersTable th {
+  padding: var(--space-md, 16px);
+  text-align: left;
+  font-weight: 600;
+  font-size: var(--text-sm, 14px);
+  color: var(--color-gray-dark, #333333);
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.ordersTable td {
+  padding: var(--space-md, 16px);
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.ordersTable tbody tr:hover {
+  background-color: var(--color-gray-light, #F5F5F5);
+}
+
+.orderIdLink {
+  color: var(--color-accent-blue, #A7D8FF);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.orderIdLink:hover {
+  text-decoration: underline;
+}
+
+.dateCell {
+  white-space: nowrap;
+  color: var(--color-gray-dark, #333333);
+}
+
+.customerInfo {
+  min-width: 150px;
+}
+
+.customerName {
+  font-weight: 500;
+  margin-bottom: var(--space-xxs, 4px);
+}
+
+.customerEmail {
+  font-size: var(--text-xs, 12px);
+  color: var(--color-gray-dark, #333333);
+}
+
+.itemsCell {
+  color: var(--color-gray-dark, #333333);
+}
+
+.totalCell {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusSelect {
+  padding: var(--space-xxs, 4px) var(--space-sm, 12px);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  font-size: var(--text-xs, 12px);
+  cursor: pointer;
+  background-color: var(--color-white, #ffffff);
+  transition: all 0.2s ease;
+}
+
+.statusSelect:focus {
+  outline: none;
+  border-color: var(--color-accent-blue, #A7D8FF);
+}
+
+.statusSelect.pending {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #fff3cd;
+}
+
+.statusSelect.processing {
+  background-color: #cfe2ff;
+  color: #084298;
+  border-color: #cfe2ff;
+}
+
+.statusSelect.shipped {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border-color: #d1e7dd;
+}
+
+.statusSelect.completed {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border-color: #d1e7dd;
+}
+
+.statusSelect.cancelled {
+  background-color: #f8d7da;
+  color: #842029;
+  border-color: #f8d7da;
+}
+
+.viewButton {
+  padding: var(--space-xxs, 4px) var(--space-sm, 12px);
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  font-size: var(--text-xs, 12px);
+  text-decoration: none;
+  color: var(--color-gray-dark, #333333);
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.viewButton:hover {
+  background-color: var(--color-gray-light, #F5F5F5);
+  border-color: var(--color-gray-dark, #333333);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--space-3xl, 64px);
+  background: var(--color-white, #ffffff);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid #e0e0e0;
+}
+
+.emptyState p {
+  color: var(--color-gray-dark, #333333);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+@media (max-width: 768px) {
+  .ordersTable {
+    font-size: var(--text-xs, 12px);
+  }
+
+  .ordersTable th,
+  .ordersTable td {
+    padding: var(--space-sm, 12px);
+  }
+
+  .statusFilters {
+    flex-direction: column;
+  }
+
+  .statusFilters button {
+    width: 100%;
+  }
+}

@@ -4,42 +4,85 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import { validateEmail, sanitizeEmail } from '@/lib/validation';
 import Button from '@/components/Button';
 import styles from './page.module.css';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const { login, loginWithGoogle } = useAuth();
   const router = useRouter();
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (errors.email) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.email;
+        return newErrors;
+      });
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (errors.password) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.password;
+        return newErrors;
+      });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    const newErrors: Record<string, string> = {};
+
+    // Validate email
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      newErrors.email = emailValidation.error || 'Invalid email';
+    }
+
+    // Validate password is not empty
+    if (!password || password.trim() === '') {
+      newErrors.password = 'Password is required';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await login(email, password);
+      // Sanitize email before login
+      const sanitizedEmail = sanitizeEmail(email);
+      await login(sanitizedEmail, password);
       router.push('/account');
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+      setErrors({ submit: err.message || 'Failed to sign in' });
     } finally {
       setLoading(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
-    setError('');
+    setErrors({});
     setGoogleLoading(true);
 
     try {
       await loginWithGoogle();
       router.push('/account');
     } catch (err: any) {
-      setError(err.message || 'Failed to sign in with Google');
+      setErrors({ submit: err.message || 'Failed to sign in with Google' });
     } finally {
       setGoogleLoading(false);
     }
@@ -50,7 +93,7 @@ export default function LoginPage() {
       <div className="container">
         <div className={styles.authContent}>
           <h1 className={styles.title}>sign in</h1>
-          {error && <div className={styles.error}>{error}</div>}
+          {errors.submit && <div className={styles.error}>{errors.submit}</div>}
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
               <label htmlFor="email" className={styles.label}>
@@ -60,11 +103,12 @@ export default function LoginPage() {
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.input}
+                onChange={handleEmailChange}
+                className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
                 required
                 autoComplete="email"
               />
+              {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="password" className={styles.label}>
@@ -74,11 +118,12 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={styles.input}
+                onChange={handlePasswordChange}
+                className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
                 required
                 autoComplete="current-password"
               />
+              {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
             </div>
             <Button type="submit" className={styles.submitButton} disabled={loading}>
               {loading ? 'signing in...' : 'sign in'}
@@ -99,7 +144,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleSignIn}
             className={styles.googleButton}
-            disabled={googleLoading || appleLoading || loading}
+            disabled={googleLoading || loading}
             variant="secondary"
           >
             <span className={styles.googleButtonContent}>
@@ -124,23 +169,8 @@ export default function LoginPage() {
               {googleLoading ? 'signing in...' : 'continue with google'}
             </span>
           </Button>
-          <Button
-            type="button"
-            onClick={handleAppleSignIn}
-            className={styles.googleButton}
-            disabled={googleLoading || appleLoading || loading}
-            variant="secondary"
-          >
-            <span className={styles.googleButtonContent}>
-              <svg className={styles.googleIcon} viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-              </svg>
-              {appleLoading ? 'signing in...' : 'continue with apple'}
-            </span>
-          </Button>
         </div>
       </div>
     </div>
   );
 }
-

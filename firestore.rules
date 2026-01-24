@@ -12,6 +12,21 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == userId;
     }
     
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.isAdmin == true;
+    }
+    
+    // Products collection - public read, admin write
+    match /products/{productId} {
+      // Anyone can read products (public)
+      allow read: if true;
+      
+      // Only admins can create, update, or delete products
+      allow create, update, delete: if isAdmin();
+    }
+    
     // Carts collection - users can only access their own cart
     match /carts/{userId} {
       allow read, write: if isOwner(userId);
@@ -22,21 +37,34 @@ service cloud.firestore {
       allow read, write: if isOwner(userId);
     }
     
-    // Orders collection - users can only create and read their own orders
+    // Orders collection
     match /orders/{orderId} {
-      // Users can create orders (userId must match authenticated user)
-      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      // Authenticated users can create orders with their userId
+      // Guests can create orders with userId = null
+      allow create: if isAuthenticated() && 
+                       (request.resource.data.userId == request.auth.uid || 
+                        request.resource.data.userId == null);
       
-      // Users can only read their own orders
-      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      // Users can read their own orders, admins can read all orders
+      // Note: Guest order tracking will be handled server-side via API route
+      // for security (email verification)
+      allow read: if isAuthenticated() && 
+                     (resource.data.userId == request.auth.uid || isAdmin());
       
-      // Orders cannot be updated or deleted after creation (immutable)
-      allow update, delete: if false;
+      // Only admins can update order status
+      allow update: if isAdmin() && 
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+      
+      // Orders cannot be deleted
+      allow delete: if false;
     }
     
-    // Profiles collection - users can only access their own profile
+    // Profiles collection
     match /profiles/{userId} {
-      allow read, write: if isOwner(userId);
+      // Users can read/write their own profile
+      // Admins can read all profiles (to check admin status)
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isOwner(userId);
     }
     
     // Deny all other access

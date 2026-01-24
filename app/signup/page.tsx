@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import { validateEmail, validatePassword, sanitizeEmail } from '@/lib/validation';
 import Button from '@/components/Button';
 import styles from './page.module.css';
 
@@ -12,47 +13,105 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const { signup, loginWithGoogle } = useAuth();
   const router = useRouter();
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (errors.email) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.email;
+        return newErrors;
+      });
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    if (errors.password) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.password;
+        return newErrors;
+      });
+    }
+    // Clear confirm password error if passwords match
+    if (value === confirmPassword && errors.confirmPassword) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.confirmPassword;
+        return newErrors;
+      });
+    }
+  };
+
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setConfirmPassword(value);
+    if (errors.confirmPassword) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.confirmPassword;
+        return newErrors;
+      });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    const newErrors: Record<string, string> = {};
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
+    // Validate email
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+      newErrors.email = emailValidation.error || 'Invalid email';
     }
 
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+    // Validate password
+    const passwordValidation = validatePassword(password, 6);
+    if (!passwordValidation.isValid) {
+      newErrors.password = passwordValidation.error || 'Invalid password';
+    }
+
+    // Validate password confirmation
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
     setLoading(true);
 
     try {
-      await signup(email, password, displayName || undefined);
+      // Sanitize email before signup
+      const sanitizedEmail = sanitizeEmail(email);
+      await signup(sanitizedEmail, password, displayName.trim() || undefined);
       router.push('/account');
     } catch (err: any) {
-      setError(err.message || 'Failed to create account');
+      setErrors({ submit: err.message || 'Failed to create account' });
     } finally {
       setLoading(false);
     }
   };
 
   const handleGoogleSignIn = async () => {
-    setError('');
+    setErrors({});
     setGoogleLoading(true);
 
     try {
       await loginWithGoogle();
       router.push('/account');
     } catch (err: any) {
-      setError(err.message || 'Failed to sign up with Google');
+      setErrors({ submit: err.message || 'Failed to sign up with Google' });
     } finally {
       setGoogleLoading(false);
     }
@@ -63,7 +122,7 @@ export default function SignupPage() {
       <div className="container">
         <div className={styles.authContent}>
           <h1 className={styles.title}>sign up</h1>
-          {error && <div className={styles.error}>{error}</div>}
+          {errors.submit && <div className={styles.error}>{errors.submit}</div>}
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
               <label htmlFor="displayName" className={styles.label}>
@@ -86,11 +145,12 @@ export default function SignupPage() {
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.input}
+                onChange={handleEmailChange}
+                className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
                 required
                 autoComplete="email"
               />
+              {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="password" className={styles.label}>
@@ -100,12 +160,13 @@ export default function SignupPage() {
                 type="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={styles.input}
+                onChange={handlePasswordChange}
+                className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
                 required
                 autoComplete="new-password"
                 minLength={6}
               />
+              {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
             </div>
             <div className={styles.formGroup}>
               <label htmlFor="confirmPassword" className={styles.label}>
@@ -115,12 +176,13 @@ export default function SignupPage() {
                 type="password"
                 id="confirmPassword"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className={styles.input}
+                onChange={handleConfirmPasswordChange}
+                className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
                 required
                 autoComplete="new-password"
                 minLength={6}
               />
+              {errors.confirmPassword && <span className={styles.errorMessage}>{errors.confirmPassword}</span>}
             </div>
             <Button type="submit" className={styles.submitButton} disabled={loading}>
               {loading ? 'creating account...' : 'sign up'}
@@ -138,7 +200,7 @@ export default function SignupPage() {
             type="button"
             onClick={handleGoogleSignIn}
             className={styles.googleButton}
-            disabled={googleLoading || appleLoading || loading}
+            disabled={googleLoading || loading}
             variant="secondary"
           >
             <span className={styles.googleButtonContent}>
@@ -163,23 +225,8 @@ export default function SignupPage() {
               {googleLoading ? 'signing up...' : 'continue with google'}
             </span>
           </Button>
-          <Button
-            type="button"
-            onClick={handleAppleSignIn}
-            className={styles.googleButton}
-            disabled={googleLoading || appleLoading || loading}
-            variant="secondary"
-          >
-            <span className={styles.googleButtonContent}>
-              <svg className={styles.googleIcon} viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-              </svg>
-              {appleLoading ? 'signing up...' : 'continue with apple'}
-            </span>
-          </Button>
         </div>
       </div>
     </div>
   );
 }
-

@@ -17,6 +17,9 @@ export default function Footer() {
             <a href="mailto:inxvinx@gmail.com" aria-label="Email" className={styles.socialLink}>
               email
             </a>
+            <Link href="/contact" className={styles.socialLink}>
+              contact
+            </Link>
             <Link href="/privacy" className={styles.socialLink}>
               privacy policy
             </Link>

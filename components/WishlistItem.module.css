@@ -110,3 +110,39 @@
   }
 }
 
+.addedToCart {
+  animation: addToCartSuccess 0.5s ease-out;
+}
+
+@keyframes addToCartSuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.addToCartContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  justify-content: center;
+}
+
+.checkmarkIcon {
+  animation: checkmarkDraw 0.5s ease-out;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation-fill-mode: forwards;
+}
+
+@keyframes checkmarkDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+

@@ -1,16 +1,44 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import Link from 'next/link';
-import { products } from '@/data/products';
+import React, { useState, useMemo, useEffect } from 'react';
+import { products as localProducts } from '@/data/products';
+import { getAllProducts } from '@/lib/firestore';
+import { Product } from '@/types';
 import ProductCard from '@/components/ProductCard';
-import Button from '@/components/Button';
 import styles from './page.module.css';
 
 type SortOption = 'default' | 'price-low' | 'price-high' | 'name';
 
+const bannerMessages = [
+  'bts world tour merch dropping soon',
+  'new pc holders incoming',
+  'svt shot glasses on sale',
+  'custom requests welcome',
+  'worldwide shipping',
+];
+
 export default function ShopPage() {
   const [sortOption, setSortOption] = useState<SortOption>('default');
+  const [products, setProducts] = useState<Product[]>(localProducts);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const firestoreProducts = await getAllProducts();
+        if (firestoreProducts.length > 0) {
+          setProducts(firestoreProducts);
+        }
+      } catch (error) {
+        console.error('Error loading products from Firestore:', error);
+        // Fallback to local products
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   const sortedProducts = useMemo(() => {
     const sorted = [...products];
@@ -28,19 +56,23 @@ export default function ShopPage() {
 
   return (
     <div className={styles.shopPage}>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className="container">
-          <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>Welcome to Shop</h1>
-            <p className={styles.heroDescription}>
-              Discover quality products with a clean, minimal shopping experience.
-            </p>
-            <div className={styles.heroActions}>
-              <Link href="#products">
-                <Button>Shop Now</Button>
-              </Link>
-            </div>
+      {/* Banner Section */}
+      <section className={styles.banner}>
+        <div className={styles.bannerWrapper}>
+          <div className={styles.bannerContent}>
+            {[0, 1].map((copyIndex) => (
+              <div key={copyIndex} className={styles.bannerText} aria-hidden={copyIndex === 1}>
+                {bannerMessages.map((message, index) => (
+                  <React.Fragment key={index}>
+                    <span>{message}</span>
+                    {index < bannerMessages.length - 1 && (
+                      <span className={styles.separator}> • </span>
+                    )}
+                  </React.Fragment>
+                ))}
+                <span className={styles.separator}> • </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

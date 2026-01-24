@@ -97,17 +97,16 @@
 .wishlistButton {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-sm) var(--space-md);
+  justify-content: center;
+  padding: var(--space-sm);
   border: 1px solid var(--color-black);
   border-radius: 0;
   background-color: transparent;
   color: var(--color-black);
-  font-size: 16px;
-  font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
-  min-height: 44px;
+  width: 44px;
+  height: 44px;
 }
 
 .wishlistButton:hover {
@@ -159,8 +158,94 @@
   }
 
   .wishlistButton {
-    width: 100%;
-    justify-content: center;
+    width: 44px;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 18px;
+  color: var(--color-gray-dark);
+}
+
+.shareSection {
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-gray-light);
+  margin-top: var(--space-lg);
+}
+
+.shareTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  color: var(--color-black);
+}
+
+.shareButtons {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.shareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-black);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-black);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  width: 44px;
+  height: 44px;
+}
+
+.shareButton:hover {
+  background-color: var(--color-gray-light);
+}
+
+.shareButton svg {
+  flex-shrink: 0;
+}
+
+.addedToCart {
+  animation: addToCartSuccess 0.5s ease-out;
+}
+
+@keyframes addToCartSuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.addToCartContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  justify-content: center;
+}
+
+.checkmarkIcon {
+  animation: checkmarkDraw 0.5s ease-out;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation-fill-mode: forwards;
+}
+
+@keyframes checkmarkDraw {
+  to {
+    stroke-dashoffset: 0;
   }
 }
 

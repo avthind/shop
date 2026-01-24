@@ -28,6 +28,20 @@ export interface Order {
   items: CartItem[];
   total: number;
   date: string;
-  status: 'pending' | 'completed' | 'cancelled';
+  status: 'pending' | 'processing' | 'shipped' | 'completed' | 'cancelled';
+  userId?: string;
+  shippingAddress?: {
+    name: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+  };
+  customerEmail?: string;
+  customerName?: string;
+  paymentIntentId?: string;
+  paymentStatus?: 'pending' | 'succeeded' | 'failed' | 'canceled';
+  paymentMethod?: string;
 }
 

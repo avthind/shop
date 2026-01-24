@@ -107,6 +107,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const clearCart = async () => {
     if (currentUser) {
       await clearCartFirestore(currentUser.uid);
+    } else {
+      // Clear localStorage cart for guests
+      localStorage.removeItem('cart');
     }
     setItems([]);
   };

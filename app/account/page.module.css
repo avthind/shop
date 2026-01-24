@@ -75,7 +75,8 @@
 }
 
 .profileSection,
-.ordersSection {
+.ordersSection,
+.settingsSection {
   display: flex;
   flex-direction: column;
 }
@@ -115,6 +116,21 @@
 .input:focus {
   outline: 2px solid var(--color-accent-blue);
   outline-offset: 2px;
+}
+
+.inputError {
+  border-color: #dc3545;
+}
+
+.inputError:focus {
+  outline-color: #dc3545;
+}
+
+.errorMessage {
+  display: block;
+  color: #dc3545;
+  font-size: var(--text-xs, 12px);
+  margin-top: var(--space-xxs, 4px);
 }
 
 .input:disabled {
@@ -243,5 +259,82 @@
   .profileForm {
     padding: var(--space-lg);
   }
+}
+
+.settingsContent {
+  background-color: var(--color-gray-light);
+  padding: var(--space-xl);
+  border-radius: 0;
+}
+
+.settingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.settingTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-black);
+  margin-bottom: var(--space-xs);
+}
+
+.settingDescription {
+  font-size: 14px;
+  color: var(--color-gray-dark);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.deleteButton {
+  align-self: flex-start;
+}
+
+.deleteConfirm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background-color: var(--color-white);
+  border: 1px solid #dc3545;
+  border-radius: 0;
+}
+
+.deleteWarning {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+.deleteList {
+  margin-left: var(--space-lg);
+  color: var(--color-gray-dark);
+  line-height: 1.8;
+}
+
+.deleteList li {
+  margin-bottom: var(--space-xs);
+}
+
+.deleteNote {
+  font-size: 14px;
+  color: var(--color-gray-dark);
+  font-style: italic;
+}
+
+.deleteActions {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.deleteConfirmButton {
+  background-color: #dc3545;
+  color: var(--color-white);
+}
+
+.deleteConfirmButton:hover:not(:disabled) {
+  background-color: #c82333;
 }
 

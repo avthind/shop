@@ -5,11 +5,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { useAdmin } from '@/hooks/useAdmin';
 import styles from './Header.module.css';
 
 export default function Header() {
   const { getTotalItems } = useCart();
   const { currentUser, logout } = useAuth();
+  const { isAdmin } = useAdmin();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const cartItemCount = getTotalItems();
@@ -39,9 +41,16 @@ export default function Header() {
               wishlist
             </Link>
             {currentUser ? (
-              <Link href="/account" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
-                account
-              </Link>
+              <>
+                <Link href="/account" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
+                  account
+                </Link>
+                {isAdmin && (
+                  <Link href="/admin" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
+                    admin
+                  </Link>
+                )}
+              </>
             ) : (
               <Link href="/login" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>
                 sign in

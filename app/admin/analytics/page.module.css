@@ -1,0 +1,304 @@
+.analyticsPage {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl, 32px);
+  flex-wrap: wrap;
+  gap: var(--space-md, 16px);
+}
+
+.header h1 {
+  font-size: var(--text-2xl, 24px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.dateRangeSelector {
+  display: flex;
+  gap: var(--space-xs, 8px);
+}
+
+.dateRangeSelector button {
+  padding: var(--space-xs, 8px) var(--space-sm, 12px);
+  background: var(--color-white, #ffffff);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  font-size: var(--text-sm, 14px);
+  transition: all 0.2s ease;
+}
+
+.dateRangeSelector button:hover {
+  background-color: var(--color-gray-light, #F5F5F5);
+}
+
+.dateRangeSelector button.active {
+  background-color: var(--color-accent-blue, #A7D8FF);
+  border-color: var(--color-accent-blue, #A7D8FF);
+  color: var(--color-black, #000000);
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md, 16px);
+  margin-bottom: var(--space-xl, 32px);
+}
+
+.metricCard {
+  background: var(--color-white, #ffffff);
+  padding: var(--space-lg, 24px);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid #e0e0e0;
+}
+
+.metricLabel {
+  font-size: var(--text-sm, 14px);
+  color: var(--color-gray-dark, #333333);
+  margin-bottom: var(--space-xs, 8px);
+}
+
+.metricValue {
+  font-size: var(--text-2xl, 24px);
+  font-weight: 600;
+  color: var(--color-black, #000000);
+  margin-bottom: var(--space-xs, 8px);
+}
+
+.metricSubtext {
+  font-size: var(--text-xs, 12px);
+  color: var(--color-gray-dark, #333333);
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space-lg, 24px);
+  margin-bottom: var(--space-xl, 32px);
+}
+
+.chartCard {
+  background: var(--color-white, #ffffff);
+  padding: var(--space-lg, 24px);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid #e0e0e0;
+}
+
+.chartCard h2 {
+  font-size: var(--text-lg, 18px);
+  font-weight: 600;
+  margin: 0 0 var(--space-md, 16px) 0;
+}
+
+.chart {
+  min-height: 200px;
+}
+
+.barChart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 200px;
+  gap: var(--space-xs, 8px);
+}
+
+.barContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.bar {
+  width: 100%;
+  background-color: var(--color-accent-blue, #A7D8FF);
+  border-radius: var(--radius-sm, 4px) var(--radius-sm, 4px) 0 0;
+  min-height: 4px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.bar:hover {
+  background-color: #82c7ff;
+}
+
+.barLabel {
+  margin-top: var(--space-xs, 8px);
+  font-size: var(--text-xs, 12px);
+  color: var(--color-gray-dark, #333333);
+  text-align: center;
+}
+
+.statusChart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md, 16px);
+}
+
+.statusBar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs, 8px);
+}
+
+.statusBarHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm, 14px);
+}
+
+.statusLabel {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusCount {
+  color: var(--color-gray-dark, #333333);
+}
+
+.statusBarTrack {
+  height: 24px;
+  background-color: var(--color-gray-light, #F5F5F5);
+  border-radius: var(--radius-sm, 4px);
+  overflow: hidden;
+}
+
+.statusBarFill {
+  height: 100%;
+  border-radius: var(--radius-sm, 4px);
+  transition: width 0.3s ease;
+}
+
+.statusBarFill.pending {
+  background-color: #fff3cd;
+}
+
+.statusBarFill.processing {
+  background-color: #cfe2ff;
+}
+
+.statusBarFill.shipped {
+  background-color: #d1e7dd;
+}
+
+.statusBarFill.completed {
+  background-color: #d1e7dd;
+}
+
+.statusBarFill.cancelled {
+  background-color: #f8d7da;
+}
+
+.section {
+  background: var(--color-white, #ffffff);
+  padding: var(--space-lg, 24px);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid #e0e0e0;
+}
+
+.section h2 {
+  font-size: var(--text-lg, 18px);
+  font-weight: 600;
+  margin: 0 0 var(--space-md, 16px) 0;
+}
+
+.topProductsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md, 16px);
+}
+
+.topProductItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md, 16px);
+  padding: var(--space-md, 16px);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+}
+
+.rank {
+  font-size: var(--text-lg, 18px);
+  font-weight: 600;
+  color: var(--color-gray-dark, #333333);
+  min-width: 40px;
+  text-align: center;
+}
+
+.productImage {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-sm, 4px);
+  overflow: hidden;
+  background-color: var(--color-gray-light, #F5F5F5);
+  flex-shrink: 0;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs, 12px);
+  color: var(--color-gray-dark, #333333);
+}
+
+.productInfo {
+  flex: 1;
+}
+
+.productName {
+  font-weight: 500;
+  margin-bottom: var(--space-xxs, 4px);
+}
+
+.productSales {
+  font-size: var(--text-xs, 12px);
+  color: var(--color-gray-dark, #333333);
+}
+
+.productRevenue {
+  font-weight: 600;
+  font-size: var(--text-lg, 18px);
+}
+
+.noData {
+  text-align: center;
+  padding: var(--space-xl, 32px);
+  color: var(--color-gray-dark, #333333);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+@media (max-width: 768px) {
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dateRangeSelector {
+    flex-wrap: wrap;
+  }
+}

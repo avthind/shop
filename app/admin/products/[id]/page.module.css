@@ -1,0 +1,267 @@
+.productEditPage {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl, 32px);
+}
+
+.header h1 {
+  font-size: var(--text-2xl, 24px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.backButton {
+  padding: var(--space-sm, 12px) var(--space-md, 16px);
+  background: var(--color-white, #ffffff);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-size: var(--text-sm, 14px);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xxs, 4px);
+  line-height: 1;
+}
+
+.backButton svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.backButton:hover {
+  background-color: var(--color-gray-light, #F5F5F5);
+}
+
+.form {
+  background: var(--color-white, #ffffff);
+  padding: var(--space-xl, 32px);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid #e0e0e0;
+}
+
+.formSection {
+  margin-bottom: var(--space-2xl, 48px);
+}
+
+.formSection:last-of-type {
+  margin-bottom: 0;
+}
+
+.formSection h2 {
+  font-size: var(--text-lg, 18px);
+  font-weight: 600;
+  margin-bottom: var(--space-md, 16px);
+  padding-bottom: var(--space-sm, 12px);
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.formGroup {
+  margin-bottom: var(--space-md, 16px);
+}
+
+.formGroup label {
+  display: block;
+  font-size: var(--text-sm, 14px);
+  font-weight: 500;
+  margin-bottom: var(--space-xs, 8px);
+  color: var(--color-gray-dark, #333333);
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup textarea {
+  width: 100%;
+  padding: var(--space-sm, 12px);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  font-size: var(--text-sm, 14px);
+  font-family: inherit;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--color-accent-blue, #A7D8FF);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md, 16px);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs, 8px);
+  cursor: pointer;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: auto;
+  cursor: pointer;
+}
+
+.helpText {
+  font-size: var(--text-xs, 12px);
+  color: var(--color-gray-dark, #333333);
+  margin-bottom: var(--space-md, 16px);
+}
+
+.imagesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-md, 16px);
+  margin-bottom: var(--space-md, 16px);
+}
+
+.imageItem {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  overflow: hidden;
+  background-color: var(--color-gray-light, #F5F5F5);
+}
+
+.imageItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageActions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: var(--space-xxs, 4px);
+  padding: var(--space-xxs, 4px);
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.imageItem:hover .imageActions {
+  opacity: 1;
+}
+
+.imageButton {
+  padding: var(--space-xxs, 4px) var(--space-xs, 8px);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  font-size: var(--text-xs, 12px);
+  transition: background-color 0.2s ease;
+}
+
+.imageButton:hover:not(:disabled) {
+  background: var(--color-white, #ffffff);
+}
+
+.imageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deleteButton {
+  color: #842029;
+}
+
+.deleteButton:hover {
+  background-color: #f8d7da;
+}
+
+.addImageButton {
+  padding: var(--space-sm, 12px) var(--space-md, 16px);
+  background: var(--color-gray-light, #F5F5F5);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  font-size: var(--text-sm, 14px);
+  transition: all 0.2s ease;
+}
+
+.addImageButton:hover {
+  background-color: var(--color-accent-blue, #A7D8FF);
+  border-color: var(--color-accent-blue, #A7D8FF);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md, 16px);
+  padding-top: var(--space-xl, 32px);
+  border-top: 1px solid #e0e0e0;
+  margin-top: var(--space-xl, 32px);
+}
+
+.cancelButton {
+  padding: var(--space-sm, 12px) var(--space-md, 16px);
+  background: var(--color-white, #ffffff);
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-size: var(--text-sm, 14px);
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: var(--color-gray-light, #F5F5F5);
+}
+
+.saveButton {
+  padding: var(--space-sm, 12px) var(--space-md, 16px);
+  background-color: var(--color-accent-blue, #A7D8FF);
+  color: var(--color-black, #000000);
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  font-size: var(--text-sm, 14px);
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: #82c7ff;
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+@media (max-width: 768px) {
+  .form {
+    padding: var(--space-md, 16px);
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .imagesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}

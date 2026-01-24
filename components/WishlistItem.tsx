@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/types';
@@ -16,9 +16,14 @@ interface WishlistItemProps {
 export default function WishlistItem({ product }: WishlistItemProps) {
   const { addToCart } = useCart();
   const { removeFromWishlist } = useWishlist();
+  const [justAdded, setJustAdded] = useState(false);
 
   const handleAddToCart = () => {
     addToCart(product, 1);
+    setJustAdded(true);
+    setTimeout(() => {
+      setJustAdded(false);
+    }, 2000);
   };
 
   const handleRemove = () => {
@@ -47,7 +52,31 @@ export default function WishlistItem({ product }: WishlistItemProps) {
         </div>
 
         <div className={styles.wishlistItemActions}>
-          <Button onClick={handleAddToCart}>Add to Cart</Button>
+          <Button 
+            onClick={handleAddToCart}
+            className={justAdded ? styles.addedToCart : ''}
+          >
+            {justAdded ? (
+              <span className={styles.addToCartContent}>
+                <svg 
+                  className={styles.checkmarkIcon}
+                  width="20" 
+                  height="20" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="3" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Added!</span>
+              </span>
+            ) : (
+              'Add to Cart'
+            )}
+          </Button>
           <button
             onClick={handleRemove}
             className={styles.removeButton}

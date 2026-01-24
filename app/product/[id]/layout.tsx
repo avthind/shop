@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ProductLayoutProps): Promise<
     openGraph: {
       title: product.name,
       description: product.description,
-      type: 'product',
+      type: 'website',
       url: `https://shop.com/product/${product.id}`,
       images: [
         {

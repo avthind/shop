@@ -65,6 +65,21 @@
   outline-offset: 2px;
 }
 
+.inputError {
+  border-color: #dc3545;
+}
+
+.inputError:focus {
+  outline-color: #dc3545;
+}
+
+.errorMessage {
+  display: block;
+  color: #dc3545;
+  font-size: var(--text-xs, 12px);
+  margin-top: var(--space-xxs, 4px);
+}
+
 .submitButton {
   width: 100%;
   margin-top: var(--space-sm);
